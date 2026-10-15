@@ -51,24 +51,19 @@ button{font:inherit}
 
 /* ---------- Splash ---------- */
 #splash{position:fixed;inset:0;z-index:50;background:#000;color:#f2f4f4;overflow:hidden;display:grid;place-items:center;cursor:pointer}
-#splash .road{position:absolute;left:0;right:0;top:58%;height:2px;background:linear-gradient(90deg,transparent,#2b3033 20%,#2b3033 80%,transparent)}
-#splash .ttl{position:relative;z-index:3;text-align:center;padding:0 16px}
-#splash .ttl .ey{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#00d2be;opacity:0;animation:fadeup .6s ease 2.2s forwards}
-#splash .ttl h1{font-size:clamp(40px,11vw,112px);font-weight:900;letter-spacing:.02em;color:#f2f4f4;display:flex;justify-content:center;flex-wrap:wrap;gap:0 .18em}
-#splash .ttl h1 span{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(12px) scale(1.06);animation:reveal .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(1.25s + var(--i)*55ms)}
+#splash::before,#splash::after{content:"";position:absolute;left:0;right:0;height:9vh;background:#000;z-index:4;pointer-events:none}
+#splash::before{top:0}#splash::after{bottom:0}
+#splash .vignette{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.75) 100%)}
+#splash .ttl{position:relative;z-index:3;text-align:center;padding:0 16px;text-shadow:0 2px 30px rgba(0,0,0,.8)}
+#splash .ttl .ey{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#00d2be;opacity:0;animation:fadeup .6s ease 2.9s forwards}
+#splash .ttl h1{font-size:clamp(40px,11vw,112px);font-weight:900;letter-spacing:.02em;color:#f2f4f4;display:flex;justify-content:center;flex-wrap:wrap;gap:0 .22em}
+#splash .ttl h1 .w{display:inline-flex;white-space:nowrap}
+#splash .ttl h1 span{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(12px) scale(1.06);animation:reveal .8s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(1.9s + var(--i)*55ms)}
 #splash .ttl h1 span.teal{color:#00d2be}
-#splash .ttl p{margin:10px 0 0;color:#9aa3a6;font-size:14px;opacity:0;animation:fadeup .6s ease 2.4s forwards}
-#splash .skip{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9aa3a6;background:none;border:1px solid #2b3033;padding:8px 12px;border-radius:999px}
-#car{position:absolute;top:50%;left:0;width:min(46vw,420px);height:auto;transform:translate(-120%,-50%);z-index:2;animation:drive 1.9s cubic-bezier(.55,0,.85,.4) .15s forwards;will-change:transform}
-#car .wheel{transform-origin:center;animation:spin .12s linear infinite}
-.streak{position:absolute;height:2px;background:linear-gradient(90deg,transparent,rgba(0,210,190,.55),transparent);width:30vw;top:50%;left:0;opacity:0;animation:streak .5s ease-out forwards}
-.puff{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(205,210,212,.55),rgba(160,165,168,.25) 45%,transparent 70%);filter:blur(6px);pointer-events:none;animation:puff var(--d,1.6s) ease-out forwards;will-change:transform,opacity}
+#splash .ttl p{margin:10px 0 0;color:#9aa3a6;font-size:14px;opacity:0;animation:fadeup .6s ease 3.1s forwards}
+#splash .skip{position:absolute;z-index:5;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9aa3a6;background:none;border:1px solid #2b3033;padding:8px 12px;border-radius:999px}
 #splash.out{animation:splashout .6s ease forwards;pointer-events:none}
 .seen #splash{display:none}
-@keyframes drive{0%{transform:translate(-120%,-50%) rotate(0)}60%{transform:translate(35vw,-50%) rotate(-.6deg)}100%{transform:translate(130vw,-52%) rotate(-1.2deg)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes streak{0%{opacity:0;transform:translateX(0) scaleX(.3)}40%{opacity:1}100%{opacity:0;transform:translateX(60vw) scaleX(1.4)}}
-@keyframes puff{0%{opacity:0;transform:translate(0,0) scale(.3)}15%{opacity:.9}100%{opacity:0;transform:translate(var(--dx,-60px),var(--dy,-90px)) scale(2.6)}}
 @keyframes reveal{to{opacity:1;filter:blur(0);transform:none}}
 @keyframes fadeup{to{opacity:1;transform:none}}
 @keyframes splashout{to{opacity:0;transform:scale(1.03)}}
@@ -228,30 +223,15 @@ svg .end{opacity:0;animation:fadein .4s ease 1.8s forwards}
 .countdown .v{font-family:var(--display);font-size:34px;font-weight:900;line-height:1}
 .countdown .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .calbtns{display:flex;gap:8px;flex-wrap:wrap}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}header::after{width:100%}svg path.line{stroke-dashoffset:0}svg path.area,svg .end{opacity:1}#car{display:none}#splash .ttl h1 span,#splash .ttl p,#splash .ttl .ey{opacity:1;filter:none;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}header::after{width:100%}svg path.line{stroke-dashoffset:0}svg path.area,svg .end{opacity:1}#splash .ttl h1 span,#splash .ttl p,#splash .ttl .ey{opacity:1;filter:none;transform:none}}
 </style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script>
 </head>
 <body>
 <script>try{if(localStorage.getItem("sa26-intro")==="seen")document.documentElement.classList.add("seen")}catch(e){}</script>
 <!-- ================= SPLASH ================= -->
 <div id="splash" role="button" aria-label="Skip intro">
-  <div class="road"></div>
-  <svg id="car" viewBox="0 0 420 120" aria-hidden="true">
-    <defs><linearGradient id="bodyG" x1="0" x2="1"><stop offset="0" stop-color="#1a1d1f"/><stop offset=".55" stop-color="#2b3033"/><stop offset="1" stop-color="#101214"/></linearGradient></defs>
-    <!-- original stylised single-seater, side profile -->
-    <path d="M18 78 L120 70 L150 50 L205 44 L255 46 L300 58 L352 64 L392 72 L400 84 L18 86 Z" fill="url(#bodyG)" stroke="#3a4246" stroke-width="1.5"/>
-    <path d="M150 50 L205 44 L255 46 L262 58 L160 62 Z" fill="#00d2be"/>
-    <path d="M24 84 L120 80 L300 76 L392 80 L392 86 L18 86 Z" fill="#00d2be" opacity=".85"/>
-    <path d="M300 58 L352 64 L392 72 L352 70 Z" fill="#c6c6c6" opacity=".9"/>
-    <path d="M214 44 L246 44 L240 28 L222 26 Z" fill="#101214"/>
-    <path d="M216 46 C226 30 246 30 256 46" fill="none" stroke="#c6c6c6" stroke-width="4"/>
-    <circle cx="232" cy="40" r="7" fill="#00d2be"/>
-    <rect x="6" y="60" width="54" height="7" rx="1" fill="#101214" stroke="#3a4246"/>
-    <rect x="360" y="34" width="52" height="8" rx="1" fill="#101214" stroke="#3a4246"/>
-    <rect x="358" y="42" width="8" height="30" fill="#101214"/>
-    <g class="wheel" style="transform-box:fill-box"><circle cx="95" cy="88" r="26" fill="#0a0b0c" stroke="#3a4246" stroke-width="3"/><circle cx="95" cy="88" r="9" fill="#2b3033"/><path d="M95 62 L95 114 M69 88 L121 88" stroke="#1f2325" stroke-width="3"/></g>
-    <g class="wheel" style="transform-box:fill-box"><circle cx="330" cy="88" r="26" fill="#0a0b0c" stroke="#3a4246" stroke-width="3"/><circle cx="330" cy="88" r="9" fill="#2b3033"/><path d="M330 62 L330 114 M304 88 L356 88" stroke="#1f2325" stroke-width="3"/></g>
-  </svg>
+  <div class="vignette"></div>
   <div class="ttl">
     <div class="ey">Mercedes-AMG Petronas F1 Team</div>
     <h1 id="splashTitle"></h1>
@@ -286,10 +266,12 @@ svg .end{opacity:0;animation:fadein .4s ease 1.8s forwards}
     <span class="pill live">After Round 17 · Singapore GP</span>
     <span class="pill">Standings as of 11 Oct 2026</span>
     <span class="pill" id="countdownPill">Next: United States GP</span>
+    <span class="pill" id="livePill" hidden>Live via eve tools</span>
   </div>
   <div class="nav">
     <button class="btn" id="navTrack" aria-current="false">Track view</button>
     <button class="btn" id="navGeneral" aria-current="true">General overview</button>
+    <a class="btn" href="/ask">Ask the agent</a>
     <button class="btn" id="replayBtn">Replay intro</button>
   </div>
 </header>
@@ -395,7 +377,8 @@ svg .end{opacity:0;animation:fadein .4s ease 1.8s forwards}
 </footer>
 </div>
 
-<script src="circuits.js"></script>
+<script src="/circuits.js"></script>
+<script type="module" src="/splash.js"></script>
 <script>
 // ================= DATA =================
 // After Round 17 (Singapore, 11 Oct 2026). a = Antonelli, g = Russell.
@@ -440,34 +423,18 @@ const store = {get:k=>{try{return localStorage.getItem(k)}catch(e){return null}}
 (function(){
   const splash=$("splash");
   const title="SILVER ARROWS 2026";
-  $("splashTitle").innerHTML=[...title].map((ch,i)=>ch===" "?`<span style="--i:${i}">&nbsp;</span>`:`<span style="--i:${i}" class="${/\d/.test(ch)?"teal":""}">${ch}</span>`).join("");
+  let li=0; $("splashTitle").innerHTML=title.split(" ").map(w=>`<span class="w">${[...w].map(ch=>`<span style="--i:${li++}" class="${/\d/.test(ch)?"teal":""}">${ch}</span>`).join("")}</span>`).join("");
   function finish(){
     if(splash.classList.contains("out")||splash.hidden) return;
     splash.classList.add("out");
-    setTimeout(()=>{splash.hidden=true;openChooser();},reduce?0:600);
+    setTimeout(()=>{splash.hidden=true;if(window.SA26Splash)window.SA26Splash.stop();openChooser();},reduce?0:600);
   }
   function play(){
     document.documentElement.classList.remove("seen");
     splash.hidden=false; splash.classList.remove("out");
-    const car=$("car"); car.style.animation="none"; void car.offsetWidth; car.style.animation="";
     document.querySelectorAll("#splashTitle span,#splash .ey,#splash p").forEach(el=>{el.style.animation="none";void el.offsetWidth;el.style.animation="";});
-    if(!reduce){
-      // exhaust smoke follows the car; streaks of speed behind it
-      let t=0; const smoke=setInterval(()=>{
-        t+=40; if(t>1800){clearInterval(smoke);return;}
-        const prog=Math.min(1,t/1900); const x=(-0.15+prog*1.35)*innerWidth;
-        for(let k=0;k<2;k++){
-          const p=document.createElement("div"); p.className="puff";
-          const sz=40+Math.random()*90; p.style.width=p.style.height=sz+"px";
-          p.style.left=(x-60-Math.random()*40)+"px"; p.style.top=(innerHeight*0.5+10-Math.random()*30)+"px";
-          p.style.setProperty("--dx",(-40-Math.random()*120)+"px"); p.style.setProperty("--dy",(-60-Math.random()*120)+"px");
-          p.style.setProperty("--d",(1.2+Math.random()*1.2)+"s");
-          splash.appendChild(p); setTimeout(()=>p.remove(),2600);
-        }
-        if(t%160===0){const s=document.createElement("div");s.className="streak";s.style.top=(innerHeight*0.5-20+Math.random()*50)+"px";s.style.left=(x-innerWidth*0.3)+"px";splash.appendChild(s);setTimeout(()=>s.remove(),600);}
-      },40);
-    }
-    clearTimeout(play._t); play._t=setTimeout(finish,reduce?900:3600);
+    if(window.SA26Splash) window.SA26Splash.play();
+    clearTimeout(play._t); play._t=setTimeout(finish,reduce?900:4400);
   }
   splash.addEventListener("click",finish);
   $("skipBtn").addEventListener("click",e=>{e.stopPropagation();finish();});
@@ -664,6 +631,25 @@ function renderRank(){
   $("rank").innerHTML=[...ROUNDS].sort((a,b)=>b.mer-a.mer).map((r,i)=>`<div class="r ${r.c===currentKey?"cur":""}" data-c="${r.c}"><b class="num">${i+1}</b><div>${r.gp}<i style="width:${r.mer/max*100}%"></i></div><b class="num">${r.mer}</b></div>`).join("");
 }
 $("rank").addEventListener("click",e=>{const row=e.target.closest(".r[data-c]");if(row)loadTrack(row.dataset.c);});
+
+
+// ================= LIVE DATA (same fetchers the eve agent's tools use, served by /api/live) =================
+(function(){
+  fetch("/api/live",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{
+    if(!d||String(d.season)!=="2026"||!d.constructors||!d.constructors.length) return;
+    const col={Mercedes:"var(--teal)",Ferrari:"var(--fer)",McLaren:"var(--mcl)","Red Bull":"var(--rb)"};
+    const left=(23-Number(d.round))*43;
+    let c=`<tr><th>Pos</th><th>Team</th><th class="r">Pts</th><th class="r">Wins</th><th class="r">Gap</th><th class="r">Max possible</th></tr>`;
+    d.constructors.forEach((t,i)=>c+=`<tr class="${t.mercedes?"merc":""}"><td class="pos num">${t.position}</td><td><span class="sw" style="--c:${col[t.team]||"var(--muted)"}"></span>${t.team}</td><td class="r num" style="font-weight:600">${t.points}</td><td class="r num">${t.wins}</td><td class="r num">${i?"-"+(d.constructors[0].points-t.points):""}</td><td class="r num" style="color:var(--muted)">${t.points+left}</td></tr>`);
+    $("const").innerHTML=c;
+    if(d.drivers&&d.drivers.length){let h=`<tr><th>Pos</th><th>Driver</th><th>Team</th><th class="r">Pts</th><th class="r">Wins</th><th class="r">Gap</th></tr>`;
+      d.drivers.slice(0,10).forEach((x,i)=>h+=`<tr class="${x.mercedes?"merc":""}"><td class="pos num">${x.position}</td><td><span class="sw" style="--c:${col[x.team]||"var(--muted)"}"></span>${x.driver}</td><td style="color:var(--muted)">${x.team}</td><td class="r num" style="font-weight:600">${x.points}</td><td class="r num">${x.wins}</td><td class="r num">${i?"-"+(d.drivers[0].points-x.points):""}</td></tr>`);
+      $("drivers").innerHTML=h;}
+    const m=d.constructors.find(t=>t.mercedes); if(m){const runner=d.constructors.find(t=>!t.mercedes);
+      const hero=document.querySelector(".tile.hero"); if(hero){hero.querySelector(".val").textContent="P"+m.position; hero.querySelector(".sub").textContent=`${m.points} pts · ${m.position===1?"+"+(m.points-runner.points)+" over "+runner.team:"-"+(d.constructors[0].points-m.points)+" to "+d.constructors[0].team}`;}}
+    $("livePill").hidden=false; $("livePill").title="Standings fetched live by the eve agent's get_standings tool";
+  }).catch(()=>{});
+})();
 
 // deep link: #track-usa or #general
 (function(){const h=(location.hash||"").slice(1);if(h.startsWith("track-")&&C[h.slice(6)]){$("chooser").hidden=true;$("splash").hidden=true;showView("track");loadTrack(h.slice(6));}else if(h==="general"){$("chooser").hidden=true;$("splash").hidden=true;showView("general");}})();
